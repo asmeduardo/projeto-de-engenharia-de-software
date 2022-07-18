@@ -31,7 +31,7 @@ public class Pedido {
         this.idCliente = idCliente;
         Pedido.produtos = produtos;
         this.metodoPagamento = "Cartão de Crédito";
-        this.tipoPedido = tipoPedido;
+        Pedido.tipoPedido = tipoPedido;
 
         iniciaParametrosSistema();
     }
@@ -77,7 +77,7 @@ public class Pedido {
     }
 
     public void setTipoPedido(Integer tipoPedido) {
-        this.tipoPedido = tipoPedido;
+        Pedido.tipoPedido = tipoPedido;
     }
 
     private void iniciaParametrosSistema() {
@@ -87,7 +87,7 @@ public class Pedido {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(cal.getTime());
-        this.dataPedido = sdf.format(cal.getTime());
+        Pedido.dataPedido = sdf.format(cal.getTime());
     }
 
     public static void salvarPedido(Pedido p) {
@@ -169,8 +169,8 @@ public class Pedido {
                     sb.append(rs.getInt("Ano_Lancamento"));
                     sb.append(", Duração = ");
                     sb.append(rs.getString("Duracao"));
-                    sb.append(", Preço de compra = ");
-                    sb.append(String.format("%.2f", rs.getDouble("Preco_Compra")));
+                    sb.append(", Preço de compra = R$ ");
+                    sb.append(String.format("%.2f", rs.getDouble("Preco_Compra")).replace(".", ","));
                 }
             } else {
                 while (rs.next()) {
@@ -182,8 +182,8 @@ public class Pedido {
                     sb.append(rs.getInt("Ano_Lancamento"));
                     sb.append(", Duração = ");
                     sb.append(rs.getString("Duracao"));
-                    sb.append(", Preço de aluguel = ");
-                    sb.append(String.format("%.2f", rs.getDouble("Preco_Aluguel")));
+                    sb.append(", Preço de aluguel = R$ ");
+                    sb.append(String.format("%.2f", rs.getDouble("Preco_Aluguel")).replace(".", ","));
                 }
             }
         } catch (SQLException e) {
@@ -238,27 +238,6 @@ public class Pedido {
         return sb;
     }
 
-//    public static String pegaDataVencimentoAluguel() {
-//        String dataVencimentoAluguel = null;
-//
-//        try {
-//            String query = "Select Data_Vencimento_Aluguel from Contem where ID_Pedido = " + idPedido + ";";
-//
-//            Statement st = ConexaoMySQL.getConexaoMySQL().createStatement();
-//
-//            ResultSet rs = st.executeQuery(query);
-//
-//            while (rs.next()) {
-//                dataVencimentoAluguel = rs.getString("Data_Vencimento_Aluguel");
-//            }
-//
-//            st.close();
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
-//
-//        return dataVencimentoAluguel;
-//    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

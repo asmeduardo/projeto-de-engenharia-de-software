@@ -2,7 +2,6 @@ package entities;
 
 import java.sql.PreparedStatement;
 import conexaobanco.ConexaoMySQL;
-import static entities.Administrador.in;
 import entities.enums.GeneroUsuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,7 +83,7 @@ public class Cliente extends Usuario {
             while (rs.next()) {
                 if (!generoAtual.equals(rs.getString("Genero"))) {
                     generoAtual = rs.getString("Genero");
-                    System.out.println(generoAtual + ":");
+                    System.out.println("\n" + generoAtual + ":");
                 }
                 System.out.println("ID = " + rs.getInt("ID_Filme")
                         + ", Título = " + rs.getString("Titulo")
@@ -93,10 +92,10 @@ public class Cliente extends Usuario {
                         + rs.getInt("Ano_Lancamento")
                         + ", Duração = "
                         + rs.getString("Duracao")
-                        + ", Preço para compra = "
-                        + rs.getDouble("Preco_Compra")
-                        + ", Preço para aluguel = "
-                        + rs.getDouble("Preco_Aluguel"));
+                        + ", Preço para compra = R$ "
+                        + String.format("%.2f", rs.getDouble("Preco_Compra")).replace(".", ",")
+                        + ", Preço para aluguel = R$ "
+                        + String.format("%.2f", rs.getDouble("Preco_Aluguel")).replace(".", ","));
             }
 
             st.close();

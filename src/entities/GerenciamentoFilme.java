@@ -24,6 +24,10 @@ public class GerenciamentoFilme {
         iniciaParametrosSistema();
     }
 
+    public Integer getIdGerenciamento() {
+        return idGerenciamento;
+    }
+
     public String getDataGerenciamento() {
         return dataGerenciamento;
     }
@@ -63,10 +67,11 @@ public class GerenciamentoFilme {
             String query = "INSERT INTO Gerencia(Data,Descricao,ID_Usuario,ID_Filme) values (?,?,?,?)";
 
             PreparedStatement preparedStmt = ConexaoMySQL.getConexaoMySQL().prepareStatement(query);
-            preparedStmt.setString(1, g.getDataGerenciamento());
-            preparedStmt.setString(2, g.getDescricao());
-            preparedStmt.setInt(3, g.getIdUsuario());
-            preparedStmt.setInt(4, g.getIdFilme());
+            preparedStmt.setInt(1, g.getIdGerenciamento());
+            preparedStmt.setString(2, g.getDataGerenciamento());
+            preparedStmt.setString(3, g.getDescricao());
+            preparedStmt.setInt(4, g.getIdUsuario());
+            preparedStmt.setInt(5, g.getIdFilme());
             
             preparedStmt.execute();
 
